@@ -18,7 +18,8 @@ export class HeroesComponent {
   }
 
   getHeroes(): void {
-    this.heroes = this.heroService.getHeroes();
+    this.heroService.getHeroes()
+      .subscribe(heroes => this.heroes = heroes); // set this.heroes to heroes array emitted by Observable
   }
 
   ngOnInit(): void {
