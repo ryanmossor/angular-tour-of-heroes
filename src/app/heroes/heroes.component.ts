@@ -18,6 +18,24 @@ export class HeroesComponent implements OnInit {
       .subscribe(heroes => this.heroes = heroes); // set this.heroes to heroes array emitted by Observable
   }
 
+  add(name: string): void {
+    name = name.trim();
+    
+    if (!name) {
+      return;
+    }
+
+    this.heroService.addHero({ name } as Hero)
+      .subscribe(hero => this.heroes.push(hero));
+  }
+
+  delete(hero: Hero): void {
+    this.heroes = this.heroes.filter(h => h !== hero);
+    // If you don't subscribe(), service can't send delete request to server.
+    // `Observable` does nothing until something subscribes
+    this.heroService.deleteHero(hero.id).subscribe();
+  }
+
   ngOnInit(): void {
     this.getHeroes();
   }
