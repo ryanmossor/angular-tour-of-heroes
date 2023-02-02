@@ -14,6 +14,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 
 @NgModule({
+  // components, directives, and pipes that belong to this NgModule
   declarations: [
     AppComponent,
     HeroesComponent,
@@ -22,6 +23,7 @@ import { HeroSearchComponent } from './hero-search/hero-search.component';
     DashboardComponent,
     HeroSearchComponent
   ],
+  // other modules whose exported classes are needed by component templates declared in THIS NgModule
   imports: [
     BrowserModule,
     FormsModule,
@@ -29,7 +31,13 @@ import { HeroSearchComponent } from './hero-search/hero-search.component';
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false })
   ],
+  // root NgModule has no reason to export anything because other modules don't need to import the root NgModule
+  exports: [],
+  // creators of services that this NgModule contributes to the global collection of services;
+  // they become accessible in all parts of the app (can also specify providers at component level)
   providers: [],
+  // main app view, called the root component, which hosts all other app views.
+  // only the root NgModule should set this property
   bootstrap: [AppComponent]
 })
 export class AppModule { }
